@@ -22,7 +22,7 @@
  void mHD_keyboard_Cmd(void);  //键盘输入控制
  void mHD_Readmsg_Poll(int msgtype );  //消息队列读取轮询
  void mHD_CompDev_SigToRPU(void);  //Dev 数据比较 更新到共享内存 同时发送 数据更新到PRU 处理器信号
- void mHD_Data_DevData_Set(void); //模块设置参数初始化信息
+void mHD_Module_ConfigData_Init(void); //模块设置参数初始化信息
 
 #ifdef __cplusplus
 }

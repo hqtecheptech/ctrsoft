@@ -18,6 +18,7 @@ SOURCES += main.c \
     local_src/CommFun.c \
     local_src/keyboard_input.c \
     local_src/MPUCtrDev.c \
+    local_src/mapp_init.c
 
 
 HEADERS += \
@@ -32,5 +33,6 @@ HEADERS += \
     local_inc/CommFun.h \
     local_inc/keyboard_input.h \
     local_inc/MPUCtrDev.h \
+    local_inc/mapp_init.h
 
 

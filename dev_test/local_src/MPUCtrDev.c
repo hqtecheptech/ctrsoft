@@ -97,16 +97,121 @@ int mHD_Read_MPUGPIO_Value(uint8_t ch)
     //int ch ={192,191,103,102,93,92};  //通道GPIO编号
      return  mHD_Read_GPIO(ch);       //读取GPIO 输入状态
 }
+/******** MPU Pulse Channels SET  *******************
+ * Features: Set the output Pulse Funtion
+ * parameter:
+ *      int ch  Input and output value = out(0-7ch)
+ *      int exp     1= install,0=uninstall
+ * return： erro = -1, success = write byte number;
+ * *******************************************/
+int mHD_Write_MPUPulse_Config(int ch,int exp)
+{
+    const int mch[8]= {0,0,6,9,7,3,4,1};
+    int fd;
+
+    char buf[64] = {'\0'};
+    char vbuf[64] = {'\0'};
+
+    if(ch<2) return -1;
+    if(exp ==0)
+    {
+        sprintf(buf,"/sys/class/pwm/pwmchip%d/unexport",mch[ch]);
+        fd= open(buf, O_WRONLY);   if(fd == -1) return -1;   //打开Plus通道
+        sprintf(vbuf,"0");
+        write(fd,vbuf,strlen(vbuf));    //卸载通道Pulse 功能
+        close(fd);  //关闭操作通道
+    }  else
+        {
+            sprintf(buf,"/sys/class/pwm/pwmchip%d/export",mch[ch]);
+            fd= open(buf, O_WRONLY);   if(fd == -1) return -1;   //打开Plus通道
+            sprintf(vbuf,"0");
+            write(fd,vbuf,strlen(vbuf));    //申请通道
+            close(fd);  //关闭操作通道
+        }
+    return 0;
+}
+/******** MPU Pulse Channels output  *******************
+ * Features: Set the output Pulse Enable
+ * parameter:
+ *      int ch  Input and output value = out(2-7ch)
+ *      int enable  1=open,0=close
+ *      int period  (ns)
+ *      int duty (%) Duty cycle
+ *      int polarty   = normal(Negative output),
+ *                          = inversed(Positive output)
+ * return： erro = -1, success = write byte number;
+ * *******************************************/
+int mHD_Write_MPUPulse_Value(int ch,int enable,uint32_t period ,uint8_t duty,uint8_t polarty)
+{
+    int fd;
+    const int mch[8]= {0,0,6,9,7,3,4,1};
+    char buf[64] = {'\0'};
+    char vbuf[64] = {'\0'};
+    double m_duty;
+    uint32_t md_duty;
+
+    if(ch<2) return -1;
+
+    sprintf(buf,"/sys/class/pwm/pwmchip%d/pwm0/duty_cycle",mch[ch]);
+    fd= open(buf, O_WRONLY);   if(fd == -1) return -1;   //打开占空比通道
+    sprintf(vbuf,"0");  write(fd,vbuf,strlen(vbuf));            //复位占空比
+    close(fd);  //关闭操作通道
+
+    sprintf(buf,"/sys/class/pwm/pwmchip%d/pwm0/period",mch[ch]);
+    fd= open(buf, O_WRONLY);   if(fd == -1) return -1;   //打开周期通道
+    sprintf(vbuf,"%d",period);  write(fd,vbuf,strlen(vbuf));            //写入周期
+    close(fd);  //关闭操作通道
+
+    md_duty = period * ((int)duty/100.0);   //计算占空比
+    sprintf(buf,"/sys/class/pwm/pwmchip%d/pwm0/duty_cycle",mch[ch]);
+    fd= open(buf, O_WRONLY);   if(fd == -1) return -1;   //打开占空比通道
+    sprintf(vbuf,"%d",md_duty);  write(fd,vbuf,strlen(vbuf));    //写入占空比
+    close(fd);  //关闭操作通道
+
+    vbuf[0] = '\0';
+    sprintf(buf,"/sys/class/pwm/pwmchip%d/pwm0/polarity",mch[ch]);
+    fd= open(buf, O_WRONLY);   if(fd == -1) return -1;   //打开极性设置
+    if( polarty ==0) strcat(vbuf,"inversedl");
+    else strcat(vbuf,"normal");
+    write(fd,vbuf,strlen(vbuf));            //写入极性
+    close(fd);  //关闭操作通道
+
+    sprintf(buf,"/sys/class/pwm/pwmchip%d/pwm0/enable",mch[ch]);
+    fd= open(buf, O_WRONLY);   if(fd == -1) return -1;   //打开占空比通道
+    if(enable ==0) write(fd,"0",1);    //关闭输出
+    else write(fd,"1",1);    //打开输出
+    close(fd);  //关闭操作通道
+
+    return 0;
+}
+
+/******** MPU Pulse Channels output  *******************
+ * Features: Set the output Pulse Enable
+ * parameter:
+ *      int ch  Input and output value = out(0-7ch)
+ *      chari* fun GPIO output function value =  "gpio"  "timer" "mmc0" "heartbeat""cpu0"
+ *      int value  output value = 0 ,1
+ * return： erro = -1, success = write byte number;
+ * *******************************************/
+//int mHD_Write_MPUPulse_Value(int ch,int enable,int ,int delayoff)
+//{
+
+//}
+
+
+
+
+
 // MPU输入输出功能初始化
 int mHD_MPUGPIO_Init(void)
 {
-
+    return 0;
 }
 
 // MPU输入输出轮询
 int mHD_MPUGPIO_Poll(void)
 {
-
+    return 0;
 }
 
 

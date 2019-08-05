@@ -223,8 +223,10 @@ typedef enum {
 //MPU 通道配置
 typedef struct {
     uint8_t     DInFunSet[MPU_DIN_FUN_MAX];              //数字量输入通道功能设置, 0=Close,1=DI,2=Encoder,3=Timer。
+    uint8_t     DInPullSet[MPU_DIN_FUN_MAX];              //数字量输入通道上下拉设置, 0=下拉,1=上拉,
     uint8_t     DOutFunSet[MPU_DOUT_FUN_MAX];        //数字量输出通道功能设置, 0=Close,1=DO,2=PWM
-    uint16_t   EnSCPulseSet[MPU_EIN_MAX];            //增量旋转编码器单圈脉冲数量,最大值65535 仅7313,7314有效
+    uint8_t     DOutPullSet[MPU_DOUT_FUN_MAX];        //数字量输出通道上下拉设置, 0=下拉,1=上拉,
+    uint16_t   EnSCPulseSet[MPU_EIN_MAX];                  //增量旋转编码器单圈脉冲数量,最大值65535
 } Cpu_config;
 //MPU Data
 typedef struct {

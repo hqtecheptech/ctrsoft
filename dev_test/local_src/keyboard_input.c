@@ -81,7 +81,7 @@ static void m_readmsgall(int msgtype)
     else printf("PRU Software not ready!\n");
 }
 
-extern  void mHD_Data_DevData_Set(void); //模块设置参数初始化信息
+extern  void mHD_Module_ConfigData_Init(void); //模块设置参数初始化信息
 
 //处理键盘输入的pru msg 信息
 void keyboard_prumsg(char (*mtf)[128],int msgtype)
@@ -112,7 +112,7 @@ void keyboard_prumsg(char (*mtf)[128],int msgtype)
                     if((i==3)||(i==4)||(i==5))
                     {
                         mHD_Read_Shm_ShareMemory_DevData(Run_data.Shmkey,Run_data.Semkey,&Dev_data);  //读取共享内存区
-                        mHD_Data_DevData_Set();   //写入数据值
+                        mHD_Module_ConfigData_Init();   //写入数据值
                         mHD_Write_Shm_ShareMemory_DevData(Run_data.Shmkey,Run_data.Semkey,&Dev_data);  //写入共享内存区
                     }
                     mHD_Send_Msg_Cmd(prucmdmsg[i],msgtype);
