@@ -147,7 +147,6 @@ int mHD_Write_MPUPulse_Value(int ch,int enable,uint32_t period ,uint8_t duty,uin
     const int mch[8]= {0,0,6,9,7,3,4,1};
     char buf[64] = {'\0'};
     char vbuf[64] = {'\0'};
-    double m_duty;
     uint32_t md_duty;
 
     if(ch<2) return -1;
