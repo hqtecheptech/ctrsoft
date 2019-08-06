@@ -144,7 +144,7 @@ int mHD_Delete_Shm_ShareMemory(key_t key)
     int shmid  = shmget(key,0,0);     //获取共享内存，返回一个id
     if(shmid == -1)  return -1;
 
-     shmdt((int *)shmid);  //分离共享内存
+     shmdt((int *)shmid);             //分离共享内存
     if(shmctl(shmid,IPC_RMID,NULL) == -1) return -1;
     else return shmid;
 }
@@ -165,10 +165,10 @@ int mHD_Write_Shm_ShareMemory_DevData(key_t shmkey,key_t semkey,Hq_Dev_Data * da
     shmid  = shmget(shmkey,0,0);     //获取共享内存，返回一个id
     if(shmid == -1)  return -1;
 
-    p  = shmat(shmid,0,0); //映射共享内存，的到虚拟地址
+    p  = shmat(shmid,0,0);          //映射共享内存，的到虚拟地址
     if(p == (void*)-1)  return  -1;
 
-    semid = semget(semkey,0,0);  //获取信号ID
+    semid = semget(semkey,0,0);    //获取信号ID
     if(semid == -1) return -1;
 
      // 写共享内存数据
