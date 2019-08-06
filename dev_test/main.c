@@ -29,6 +29,7 @@ testdefine();
 
 #elif defined HQ_HLXT
  testdefine();
+ sleep(1);
 
 #endif
 //    mHD_MPUGPIO_Test();  //Test MPU GPIO
