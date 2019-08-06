@@ -23,8 +23,8 @@ int  main(void)
      mHD_Send_Msg_Cmd(Msg_WritePara,luozx);
      sleep(1);
      mHD_Send_Msg_Cmd(Msg_ReadPara,luozx);
-//     sleep(1);
-//     mHD_Send_Msg_Cmd(Msg_StartScan,luozx);
+     sleep(1);
+     mHD_Send_Msg_Cmd(Msg_StartScan,luozx);
 
     while(1)
     {
