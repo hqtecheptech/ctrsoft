@@ -5,6 +5,7 @@
 #include  "../mhd_lib/inc/mhd_lib.h"
 #include "local_inc/MPUCtrDev.h"
 #include "local_inc/mapp_init.h"
+#include "local_inc/DEV_CONF.h"
 
 extern void test_shm_sem_msg(void);
 
@@ -13,11 +14,25 @@ int  main(void)
 
     //fanruitest
 
-    test_shm_sem_msg();
-    while(1)
-    {
-        usleep(10000);
-    }
+//    test_shm_sem_msg();
+//    while(1)
+//    {
+//        usleep(10000);
+//    }
+
+
+#if defined HQ_FPJ
+
+testdefine();
+
+#elif defined HQ_YXC
+ testdefine();
+
+#elif defined HQ_HLXT
+ testdefine();
+ sleep(1);
+
+#endif
 //    mHD_MPUGPIO_Test();  //Test MPU GPIO
 //    mHD_Software_Init();
 

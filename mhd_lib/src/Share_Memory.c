@@ -149,7 +149,7 @@ int mHD_Delete_Shm_ShareMemory(key_t key)
     else return shmid;
 }
 
-/**** 1.1 写入Hq_Dev_Data到共享内存 *******
+/****  写入Hq_Dev_Data到共享内存 *******
  *  说明：Hq_Dev_Data
  *  参数：key_t key  共享内存KEY
  *              Hq_Dev_Datat * data 指向需要写入的数
@@ -181,8 +181,8 @@ int mHD_Write_Shm_ShareMemory_DevData(key_t shmkey,key_t semkey,Hq_Dev_Data * da
       return shmid;
 }
 
-/****  1.0写入数据到共享内存 通用*******
- *  说明：写入数据共享内存
+/****  写入数据到共享内存 通用*******
+ *  说明：Hq_Dev_Data
  *  参数：key_t key  共享内存KEY
  *              void * data 指向需要写入的数
  *              int 写入字节数
@@ -214,7 +214,7 @@ int mHD_Write_Shm_ShareMemory(key_t shmkey,key_t semkey,int len,void * data)
       return shmid;
 }
 
-/**** 2.1 读取共享内存值到Hq_Dev_Data *******
+/****  读取共享内存值到Hq_Dev_Data *******
  *  说明：读取共存内存 Hq_Dev_Data
  *  参数：key_t key  共享内存KEY
  *             Hq_Dev_Datat * data 指向读取缓存区
@@ -246,8 +246,8 @@ int mHD_Read_Shm_ShareMemory_DevData(key_t shmkey,key_t semkey,Hq_Dev_Data * dat
       return shmid;
 }
 
-/****  2.0读取共享内存值 通用 *******
- *  说明：读取共存内存
+/****  读取共享内存值 通用 *******
+ *  说明：读取共存内存 Hq_Dev_Data
  *  参数：key_t key  共享内存KEY
  *              * data 指向读取缓存区
  *              int len  需要读取的字节数
@@ -309,7 +309,7 @@ int mHD_Delete_Meg_MessageQueue(key_t key)
 /*** 发送消息队列 *******
  *  参数：int msgid  消息队列标识符
  *  返回：  成功：0
- *               失败：-1
+ *          失败：-1
  * cmd ==1 发送启动完成；
  * cmd ==2 发送数据更新；
  * ****************************************************/
