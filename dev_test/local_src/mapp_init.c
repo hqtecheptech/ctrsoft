@@ -112,12 +112,12 @@ typedef struct {
 #define LCMAX  3
 #define PDMAX  4
 
-typedef struct {
-    uint8_t * lxST;
-    uint8_t * lxstatus;
-    uint16_t * lxspeedstatus;
-    uint16_t * lxsetspeed;
-} LC_data;
+//typedef struct {
+//    uint8_t * lxST;
+//    uint8_t * lxstatus;
+//    uint16_t * lxspeedstatus;
+//    uint16_t * lxsetspeed;
+//} LC_data;
 
 typedef struct{
     int m_[TESTLEN];
