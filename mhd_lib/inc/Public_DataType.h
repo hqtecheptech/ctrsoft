@@ -42,7 +42,12 @@
 #define SIGFRPU     SIGRTMIN+1   //来自PRU的数据更新信号
 #define SIGTRPU     SIGRTMIN+2   //发送给PRU的数据更新信号
 
-
+/* DB datas length */
+#define DB_FLOAT_LEN 500
+#define DB_UINT16_LEN 500
+#define DB_UINT8_LEN 500
+#define DB_INT_LEN 500
+#define DB_BOOL_LEN 500
 
 struct Data8_sBit{
      uint8_t B0:1; uint8_t B1:1; uint8_t B2:1; uint8_t B3:1;
@@ -278,6 +283,17 @@ typedef struct {
     uint8_t           ModuleNum;                                       //模块数量
     int                  SigEn;                                                    //有需要处理的更新数据
 }Hq_Run_Data;
+
+
+//
+typedef struct {
+    float f_data[DB_FLOAT_LEN];
+    uint16_t dw_data[DB_UINT16_LEN];
+    uint8_t w_data[DB_UINT8_LEN];
+    int i_data[DB_INT_LEN];
+    int b_data[DB_BOOL_LEN];
+ }Hq_Plc_Db;
+
 
 extern Hq_Dev_Data Dev_data;             //模块 IO 数据定义
 extern Hq_Mpu_Data Mpu_data;          //MPU IO 数据定义
