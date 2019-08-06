@@ -201,16 +201,16 @@ typedef enum {
  } Mod_config;
 
  typedef struct {
-     uint8_t      BitNum;                                                 //位号
-     uint16_t    Name;                                                     //模块名词
-     uint8_t      Status;                                                    //设置任务状态,0=已完成写入，1=未完成写入。
-     uint8_t      ErrCode;                                                 //设置错误代码 详见错误代码表。
-     uint8_t      DInData[MODULE_DIN_MAX ];   //开关量输入状态,  只读
+     uint8_t      BitNum;                                            //位号
+     uint16_t    Name;                                                 //模块名词
+     uint8_t      Status;                                            //设置任务状态,0=已完成写入，1=未完成写入。
+     uint8_t      ErrCode;                                           //设置错误代码 详见错误代码表。
+     uint8_t      DInData[MODULE_DIN_MAX ];                  //开关量输入状态,  只读
      uint8_t      DOutData[MODULE_DOUT_MAX ];                        //开关量输出状态,  读写
-     uint8_t      EnInClear[MODULE_EIN_MAX];                             //旋转编码器清零。按位操作 读写
-     uint8_t      EnInDir[MODULE_EIN_MAX];                                //增量旋转编码器旋转方向。按位操作 只读 0=正转，1=反转
-     uint8_t      SSIInDir[MODULE_SSIN_MAX];                             //绝对值编码器旋转方向。按位操作 只读 0=正转，1=反转
-     uint8_t      SSIErr[MODULE_SSIN_MAX];                                 //SSI旋转编码器错误码 B0,B3=SYNC B1,B4=RSI B2,B5=SYNC
+     uint8_t      EnInClear[MODULE_EIN_MAX];                     //旋转编码器清零。按位操作 读写
+     uint8_t      EnInDir[MODULE_EIN_MAX];                          //增量旋转编码器旋转方向。按位操作 只读 0=正转，1=反转
+     uint8_t      SSIInDir[MODULE_SSIN_MAX];                          //绝对值编码器旋转方向。按位操作 只读 0=正转，1=反转
+     uint8_t      SSIErr[MODULE_SSIN_MAX];                      //SSI旋转编码器错误码 B0,B3=SYNC B1,B4=RSI B2,B5=SYNC
      uint32_t    PulseData[MODULE_POUT_MAX];       //脉冲输出频率 读写
      int32_t      EnPulseData[MODULE_EIN_MAX];       //增量旋转编码器脉冲值 只读
      uint16_t    EnSpeedData[MODULE_EIN_MAX];      //增量旋转编码器速度 只读 单位 转/分
