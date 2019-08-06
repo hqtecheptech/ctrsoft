@@ -134,7 +134,7 @@ typedef struct {
 } HLXT_data;
 
 
-HLXT_data hlxt;
+//HLXT_data hlxt;
 
 void testgobalvalve(void)
 {
