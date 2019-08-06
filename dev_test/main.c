@@ -8,7 +8,7 @@
 #include "local_inc/DEV_CONF.h"
 
 extern void test_shm_sem_msg(void);
-
+extern void testgobalvalve(void);
 int  main(void)
 {
 
@@ -19,20 +19,21 @@ int  main(void)
 //    {
 //        usleep(10000);
 //    }
+    testgobalvalve();
 
 
-#if defined HQ_FPJ
+//#if defined HQ_FPJ
 
-testdefine();
+//testdefine();
 
-#elif defined HQ_YXC
- testdefine();
+//#elif defined HQ_YXC
+// testdefine();
 
-#elif defined HQ_HLXT
- testdefine();
- sleep(1);
+//#elif defined HQ_HLXT
+// testdefine();
+// sleep(1);
 
-#endif
+//#endif
 //    mHD_MPUGPIO_Test();  //Test MPU GPIO
 //    mHD_Software_Init();
 
