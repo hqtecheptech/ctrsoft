@@ -31,7 +31,7 @@ int  main(void)
         mHD_keyboard_Cmd();
         mHD_Readmsg_Poll(luozx);
         mHD_CompDev_SigToRPU();
-        //Dev_data.MData[1].DOutData[6] =1;
+        Dev_data.MData[1].DOutData[6] =1;
         //Dev_data.MData[1].PulseData[6] =10;
     }
     return 0;
