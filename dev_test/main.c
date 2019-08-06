@@ -15,7 +15,7 @@ int  main(void)
 
     mHD_Software_Init();
 
-     //SmHD_Send_Msg_Cmd(Msg_Link,luozx);
+     mHD_Send_Msg_Cmd(Msg_Link,luozx);
      sleep(1);
      mHD_Read_Shm_ShareMemory_DevData(Run_data.Shmkey,Run_data.Semkey,&Dev_data);  //读取共享内存区
      mHD_Data_DevData_Set();   //写入数据值
