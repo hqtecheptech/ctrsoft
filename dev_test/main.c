@@ -8,7 +8,7 @@
 
 int  main(void)
 {
-      mHD_MPUGPIO_Test();  //Test MPU GPIO
+    mHD_MPUGPIO_Test();  //Test MPU GPIO
 
 
 
