@@ -18,7 +18,10 @@ SOURCES += main.c \
     local_src/CommFun.c \
     local_src/keyboard_input.c \
     local_src/MPUCtrDev.c \
-    local_src/mapp_init.c
+    local_src/mapp_init.c \
+    Dev/FPJ/FPJ.c \
+    Dev/HLJ/HLXT.c \
+    Dev/YXC/YXC.c
 
 
 HEADERS += \
@@ -33,6 +36,10 @@ HEADERS += \
     local_inc/CommFun.h \
     local_inc/keyboard_input.h \
     local_inc/MPUCtrDev.h \
-    local_inc/mapp_init.h
+    local_inc/mapp_init.h \
+    local_inc/DEV_CONF.h \
+    Dev/FPJ/FPJ.h \
+    Dev/HLJ/HLXT.h \
+    Dev/YXC/YXC.h
 
 
