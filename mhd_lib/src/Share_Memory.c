@@ -180,6 +180,40 @@ int mHD_Write_Shm_ShareMemory_DevData(key_t shmkey,key_t semkey,Hq_Dev_Data * da
       if(shmdt(p) == -1)  return -1;
       return shmid;
 }
+
+/****  写入数据到共享内存 通用*******
+ *  说明：Hq_Dev_Data
+ *  参数：key_t key  共享内存KEY
+ *              void * data 指向需要写入的数
+ *              int 写入字节数
+ * 返回：成功:写入的共享内存段标识符
+ *             失败：-1
+ * **************************************/
+int mHD_Write_Shm_ShareMemory(key_t shmkey,key_t semkey,int len,void * data)
+{
+    int shmid;
+    int semid;
+    void *p;
+
+    shmid  = shmget(shmkey,0,0);     //获取共享内存，返回一个id
+    if(shmid == -1)  return -1;
+
+    p  = shmat(shmid,0,0); //映射共享内存，的到虚拟地址
+    if(p == (void*)-1)  return  -1;
+
+    semid = semget(semkey,0,0);  //获取信号ID
+    if(semid == -1) return -1;
+
+     // 写共享内存数据
+    mHD_Sem_P_Lock(semid);
+    memcpy(p,data,len);
+    mHD_Sem_V_Unlock(semid);
+
+    //解除映射
+      if(shmdt(p) == -1)  return -1;
+      return shmid;
+}
+
 /****  读取共享内存值到Hq_Dev_Data *******
  *  说明：读取共存内存 Hq_Dev_Data
  *  参数：key_t key  共享内存KEY
@@ -205,6 +239,39 @@ int mHD_Read_Shm_ShareMemory_DevData(key_t shmkey,key_t semkey,Hq_Dev_Data * dat
     // 读取共享内存数据
     mHD_Sem_P_Lock(shmid);
     memcpy((void *)data,p,sizeof(Hq_Dev_Data));
+    mHD_Sem_V_Unlock(shmid);
+
+    //解除映射
+      if(shmdt(p) == -1) return -1;
+      return shmid;
+}
+
+/****  读取共享内存值 通用 *******
+ *  说明：读取共存内存 Hq_Dev_Data
+ *  参数：key_t key  共享内存KEY
+ *              * data 指向读取缓存区
+ *              int len  需要读取的字节数
+ * 返回：成功:读取共享内存段标识符
+ *             失败：-1
+ * **************************************/
+int mHD_Read_Shm_ShareMemory(key_t shmkey,key_t semkey,int len,void* data)
+{
+    int shmid;
+    int semid;
+    void  *p;
+
+    shmid  = shmget(shmkey,0,0);     //获取共享内存，返回一个id
+    if(shmid == -1) return -1;
+
+    p  = shmat(shmid,0,0); //映射共享内存，的到虚拟地址
+    if((void*)-1 ==p)  return  -1;
+
+    semid = semget(semkey,0,0);  //获取信号ID
+    if(semid == -1) return -1;
+
+    // 读取共享内存数据
+    mHD_Sem_P_Lock(shmid);
+    memcpy(data,p,len);
     mHD_Sem_V_Unlock(shmid);
 
     //解除映射

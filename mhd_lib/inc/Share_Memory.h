@@ -26,6 +26,9 @@ int mHD_Delete_Shm_ShareMemory(key_t key);                      //销毁共享�
 int mHD_Write_Shm_ShareMemory_DevData(key_t shmkey,key_t semkey,Hq_Dev_Data * data); //写入Hq_Dev_Data到共享内存
 int mHD_Read_Shm_ShareMemory_DevData(key_t shmkey,key_t semkey,Hq_Dev_Data * data);   //读取共享内存值到Hq_Dev_Data
 
+int mHD_Read_Shm_ShareMemory(key_t shmkey,key_t semkey,int len,void* data); //读取共享内存值 通用
+int mHD_Write_Shm_ShareMemory(key_t shmkey,key_t semkey,int len,void * data); //写入数据到共享内存 通用
+
 /************************ 消息队列 ***********************************/
 int mHD_Creat_Meg_MessageQueue(key_t key);        //创建消息队列
 int mHD_Delete_Meg_MessageQueue(key_t key );      //删除消息队列
