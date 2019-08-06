@@ -28,7 +28,7 @@ int  main(void)
 
     while(1)
     {
-        mHD_keyboard_Cmd();
+        //mHD_keyboard_Cmd();
         mHD_Readmsg_Poll(luozx);
         mHD_CompDev_SigToRPU();
         Dev_data.MData[1].DOutData[6] =1;
