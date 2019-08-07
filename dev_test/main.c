@@ -19,7 +19,7 @@ int  main(void)
 //    {
 //        usleep(10000);
 //    }
-    //testgobalvalve();
+     testgobalvalve();
 
 
 //#if defined HQ_FPJ
