@@ -12,8 +12,6 @@ extern void testgobalvalve(void);
 int  main(void)
 {
 
-    //fanruitest
-
 //    test_shm_sem_msg();
 //    while(1)
 //    {
