@@ -110,7 +110,7 @@ typedef struct {
 
 
 #define LCMAX  3
-#define PDMAX  4
+//#define PDMAX  4
 
 typedef struct {
     uint8_t * lxST;
