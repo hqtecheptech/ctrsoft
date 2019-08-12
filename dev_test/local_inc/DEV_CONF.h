@@ -5,8 +5,8 @@
  extern "C" {
 #endif /* __cplusplus */
 
-#define  HQ_FPJ
-//#define  HQ_YXC
+//#define  HQ_FPJ
+#define  HQ_YXC
 //#define  HQ_HLXT
 
 
