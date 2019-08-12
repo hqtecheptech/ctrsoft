@@ -138,7 +138,7 @@ HLXT_data hlxt;
 
 void testgobalvalve(void)
 {
-    hlxt.lc[0].lxST = &Dev_data.MData[1].DInData[1];
+     hlxt.lc[0].lxST = &Dev_data.MData[1].DInData[1];
     *hlxt.lc[0].lxST =52;
 
     printf("hlxt.lc[0].ixst *p =  %d\n",(int)hlxt.lc[0].lxST);
