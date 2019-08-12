@@ -10,7 +10,7 @@
 
 
 
-/******** MPU GPIO Channels Configuration*********
+/******1.0 MPU GPIO Channels Configuration****通道设置********
  * Features: Set input and output functions
  * parameter:
  *      int ch   Input and output value = in(0-6ch) ,out(2-7ch)
@@ -18,7 +18,7 @@
  *      char *mode channels mode value =  gpio,pulse,encoder
  *      char *pull  Pull up and down value =   up,down
  * return： erro = -1, success = write byte number;
- * *******************************************/
+ * *******************************************************/
 int mHD_Write_MPUGPIO_Config(int ch,char *inout,char *mode,char *pull)
 {
     int fd;
@@ -28,7 +28,7 @@ int mHD_Write_MPUGPIO_Config(int ch,char *inout,char *mode,char *pull)
     fd= open("/dev/hq_gpio_set", O_WRONLY);  //打开配置模块
     if(fd ==-1) return -1;  //打开失败返回
     strcat(buf,inout);                //buf = "in or out"
-    sprintf(tbuf,"[%d]",ch);      //[1]
+    sprintf(tbuf,"[%d]",ch);      //[1]        注:格式化字符串复制(以字符的格式存在),参数第二位后的格式 同 printf
     strcat(buf,tbuf);                 //buf = "in[1]"
     strcat(buf," ");                    //buf = "in[1] "
     strcat(buf,mode);              //buf = "in[1] gpio"
@@ -39,20 +39,20 @@ int mHD_Write_MPUGPIO_Config(int ch,char *inout,char *mode,char *pull)
     close(fd);  //关闭模块
     return wlen;
 }
-/******** MPU GPIO Channels output  *******************
+/********1.1 MPU GPIO Channels output  ****通道输出***************
  * Features: Set the output value
  * parameter:
  *      int ch  Input and output value = out(0-7ch)
  *      chari* fun GPIO output function value =  "gpio"  "timer" "mmc0" "heartbeat""cpu0"
  *      int value  output value = 0 ,1
  * return： erro = -1, success = write byte number;
- * *******************************************/
+ * **********************************************************/
 int mHD_Write_MPUGPIO_Value(int ch,char * fun,int value,int delayon,int delayoff)
 {
     int fd;
     int wlen;
-    char buf[64] = {'\0'};
-    char vbuf[64] = {'\0'};
+    char buf[64] = {'\0'};    // 保存的是文件的路径,open打开的是该路径下 的文件
+    char vbuf[64] = {'\0'};   // 往文本中 要写入的 值
     if(strcmp(fun,MPU_DO_TIMER) ==0)
     {
         sprintf(buf,"/sys/class/leds/gpio_out%d/trigger",ch);
@@ -78,7 +78,7 @@ int mHD_Write_MPUGPIO_Value(int ch,char * fun,int value,int delayon,int delayoff
         sprintf(buf,"/sys/class/leds/gpio_out%d/brightness",ch);  //写入通道的字符串
         fd= open(buf, O_WRONLY);   //打开GPIO通道
         if(fd == -1) return -1;                    //打开失败返回
-        sprintf(vbuf,"%d",value);                   //写入值
+        sprintf(vbuf,"%d",value);                   //写入值  字符的形式存在
         wlen = write(fd,vbuf,strlen(vbuf));    //写入通道
         close(fd);  //关闭GPIO通道
     }
@@ -97,13 +97,13 @@ int mHD_Read_MPUGPIO_Value(uint8_t ch)
     //int ch ={192,191,103,102,93,92};  //通道GPIO编号
      return  mHD_Read_GPIO(ch);       //读取GPIO 输入状态
 }
-/******** MPU Pulse Channels SET  *******************
+/******** MPU Pulse Channels SET  ******脉冲通道设置*************
  * Features: Set the output Pulse Funtion
  * parameter:
  *      int ch  Input and output value = out(0-7ch)
  *      int exp     1= install,0=uninstall
  * return： erro = -1, success = write byte number;
- * *******************************************/
+ * ***********************************************************/
 int mHD_Write_MPUPulse_Config(int ch,int exp)
 {
     const int mch[8]= {0,0,6,9,7,3,4,1};
@@ -118,29 +118,29 @@ int mHD_Write_MPUPulse_Config(int ch,int exp)
         sprintf(buf,"/sys/class/pwm/pwmchip%d/unexport",mch[ch]);
         fd= open(buf, O_WRONLY);   if(fd == -1) return -1;   //打开Plus通道
         sprintf(vbuf,"0");
-        write(fd,vbuf,strlen(vbuf));    //卸载通道Pulse 功能
+        write(fd,vbuf,strlen(vbuf));    //卸载通道Pulse 功能   往unexport写如0
         close(fd);  //关闭操作通道
     }  else
         {
             sprintf(buf,"/sys/class/pwm/pwmchip%d/export",mch[ch]);
             fd= open(buf, O_WRONLY);   if(fd == -1) return -1;   //打开Plus通道
             sprintf(vbuf,"0");
-            write(fd,vbuf,strlen(vbuf));    //申请通道
+            write(fd,vbuf,strlen(vbuf));    //申请通道  往export写如0
             close(fd);  //关闭操作通道
         }
     return 0;
 }
-/******** MPU Pulse Channels output  *******************
+/******** MPU Pulse Channels output  *******脉冲通道输出************
  * Features: Set the output Pulse Enable
  * parameter:
  *      int ch  Input and output value = out(2-7ch)
  *      int enable  1=open,0=close
- *      int period  (ns)
- *      int duty (%) Duty cycle
- *      int polarty   = normal(Negative output),
- *                          = inversed(Positive output)
+ *      int period  (ns)       周期
+ *      int duty (%) Duty cycle    占空比
+ *      int polarty    = normal(Negative output),     1 正常(负输出)
+ *          极性        = inversed(Positive output)    0 颠倒(正输出)
  * return： erro = -1, success = write byte number;
- * *******************************************/
+ * *************************************************************/
 int mHD_Write_MPUPulse_Value(int ch,int enable,uint32_t period ,uint8_t duty,uint8_t polarty)
 {
     int fd;
