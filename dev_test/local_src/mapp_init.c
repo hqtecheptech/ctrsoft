@@ -110,7 +110,7 @@ typedef struct {
 
 
 #define LCMAX  3
-//#define PDMAX  4
+#define PDMAX  4
 
 typedef struct {
     uint8_t * lxST;
@@ -134,7 +134,7 @@ typedef struct {
 } HLXT_data;
 
 
-//HLXT_data hlxt;
+HLXT_data hlxt;
 
 void testgobalvalve(void)
 {
