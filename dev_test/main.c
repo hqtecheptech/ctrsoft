@@ -17,12 +17,12 @@ int  main(void)
 //    {
 //        usleep(10000);
 //    }
-//     testgobalvalve();
+    testgobalvalve();
 
 
 //#if defined HQ_FPJ
 
-//testdefine();
+   // testdefine();
 
 //#elif defined HQ_YXC
 // testdefine();

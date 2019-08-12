@@ -110,7 +110,7 @@ typedef struct {
 
 
 #define LCMAX  3
-//#define PDMAX  4
+#define PDMAX  4
 
 typedef struct {
     uint8_t * lxST;
@@ -120,11 +120,11 @@ typedef struct {
 } LC_data;
 
 typedef struct{
-    int m_[TESTLEN];
+    int m_ad[TESTLEN];
 } PD_data;
 
 typedef struct {
-    int m_[TESTLEN];
+    int m_ta[TESTLEN];
 } HL_data;
 
 typedef struct {
@@ -134,11 +134,11 @@ typedef struct {
 } HLXT_data;
 
 
-//HLXT_data hlxt;
+HLXT_data hlxt;
 
 void testgobalvalve(void)
 {
-    hlxt.lc[0].lxST = &Dev_data.MData[1].DInData[1];
+     hlxt.lc[0].lxST = &Dev_data.MData[1].DInData[1];
     *hlxt.lc[0].lxST =52;
 
     printf("hlxt.lc[0].ixst *p =  %d\n",(int)hlxt.lc[0].lxST);

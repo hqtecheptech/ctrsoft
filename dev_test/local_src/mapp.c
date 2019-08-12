@@ -24,11 +24,6 @@ static void mHD_printf_err(void)
     printf("Input command error! Please check!\n");
 }
 
-static void mHD_printf_complete(void)
-{
-    printf("complete!!!\n");
-}
-
 
 //获取键盘输入
 void * mHD_keyboard_Scan(void * arg)
